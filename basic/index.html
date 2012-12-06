@@ -7,20 +7,14 @@ layout: reference
     <span class="docs">
       <a target="new" href="http://progit.org/book/ch2-2.html">book</a>
     </span>
-    Cơ bản về bản sao.
+    Cơ bản về bản sao
   </h2>
   <div class="block">
     <p>
-    Làm việc với Git chủ yếu bao gồm tạo và so sánh các bản sao của dự án. Phần
-    này trình bày về những lệnh cần thiết để tạo và xác nhận các bản sao.
+    Làm việc với Git chủ yếu bao gồm tạo và so sánh các bản sao của dự án.
+    Phần này trình bày về những lệnh cần thiết để tạo và xác nhận các bản sao.
     </p>
 
-    <p>
-    An important concept here is that Git has an 'index', which acts as sort
-    of a staging area for your snapshot.  This allows you to build up a series
-    of well composed snapshots from changed files in your working directory,
-    rather than having to commit all of the file changes at once.
-    </p>
     <p>
     Một khái niệm quan trọng của Git là 'chỉ mục'. Có thể được coi nó là một
     vùng tạm thời trước khi tạo bản sao chính, nhờ nó bạn có thể tạo những bản
@@ -29,16 +23,11 @@ layout: reference
     </p>
 
     <p class="nutshell">
-    <strong>In a nutshell</strong>, you will use <code>git add</code> to start tracking new
-    files and also to stage changes to already tracked files, then
-    <code>git status</code> and <code>git diff</code> to see what has been
-    modified and staged and finally <code>git commit</code> to record your
-    snapshot into your history.  This will be the basic workflow that you use
-    most of the time.
     <strong>Tóm tắt:</strong>, sử dụng lệnh <code>git add</code> để bắt đầu
     theo dõi file mới và cũng để ghi nhận các file cũ đã thay đổi. Sau đó dùng
     lệnh <code>git status</code> và <code>git diff</code> để xem lại các thay
-    đổi đã được ghi nhận, và cuối cùng dùng lệnh <code>git commit</code> để lưu lại bản sao của dự án.
+    đổi đã được ghi nhận, và cuối cùng dùng lệnh <code>git commit</code>
+    để lưu lại bản sao của dự án.
     </p>
 
   </div>
@@ -56,25 +45,12 @@ layout: reference
 
   <div class="block">
     <p>
-    In Git, you have to add file contents to your staging area before you
-    can commit them.  If the file is new, you can run <code>git add</code>
-    to initially add the file to your staging area, but even if the file
-    is already "tracked" - ie, it was in your last commit - you still need
-    to call <code>git add</code> to add new modifications to your staging
-    area. Let's see a few examples of this.
-    </p>
-    <p>
     Với git, bạn phải thêm file vào vùng tạm trước khi bạn có thể xác nhận. Bạn
     có thể dùng lệnh <code>git add</code> để thêm cả file mới cũng như những
     file đã được theo dõi (ví dụ như file từ những lần xác nhận trước) vào vùng
     tạm. Dưới đây là một vài ví dụ.
     </p>
 
-    <p>Going back to our Hello World example, once we've initiated the project,
-    we would now start adding our files to it and we would do that with
-    <code>git add</code>.  We can use <code>git status</code> to see what the
-    state of our project is.
-    </p>
     <p>Ở ví dụ Hello World, sau khi khởi tạo dự án, ta sẽ bắt đầu thêm file vào
     bằng cách dùng <code>git add</code>. Chúng ta có thể dùng <code>git status</code>
     để xem trạng thái hiện tại của dự án.
@@ -86,15 +62,12 @@ layout: reference
 <span class="red">??</span> hello.rb
 </pre>
 
-    So right now we have two untracked files.  We can now add them.
     Hiện tại có hai file chưa được theo dõi. Chúng ta có thể thêm chúng vào dự án.
 
 <pre>
 <b>$ git add README hello.rb</b>
 </pre>
 
-    Now if we run <code>git status</code> again, we'll see that they've been
-    added.
     Bây giờ nếu chạy <code>git status</code> một lần nữa, chúng ta sẽ thấy
     chúng đã được thêm.
 
@@ -117,12 +90,13 @@ layout: reference
     <p class="aside">
     Git có thể thêm file một cách đệ qui tất cả các file trong một thư mục, do
     đó để thêm tất cả các file trong thư mục dự án, ta cũng thường dùng
-    <code>git add .</code>. Trong trường hợp này ta cũng có thể dùng <code>git add *</code>,
-    nhưng chỉ không có thư mục con nào trong dự án.
+    <code>git add .</code>.
+    Việc dùng <code> git add . </code> cũng có tác dụng như khi bạn gõ lệnh
+    <code>git add README hello.rb</code>, và nếu như trong thư mục hiện
+    tại không có thêm thư mục con nào thì tác dụng của lệnh <code>git add .</code>
+    và <code>git add *</code> có thể nói là như nhau.
     </p>
 
-    <p>OK, so now if we edit one of these files and run <code>git status</code>
-    again, we will see something odd.</p>
     <p>Nếu bây giờ chúng ta sửa một file và tiếp tục thực hiện lệnh <code>git status</code>,
     kết quả sẽ như thế này.</p>
 
@@ -133,39 +107,26 @@ layout: reference
 <span class="green">A</span>  hello.rb
 </pre>
 
-    <p>The 'AM' status means that the file has been modified on disk since we
-    last added it.  This means that if we commit our snapshot right now, we will
-    be recording the version of the file when we last ran <code>git add</code>,
-    not the version that is on our disk.  Git does not assume that what the file
-    looks like on disk is neccesarily what you want to snapshot - you have to
-    tell Git with the <code>git add</code> command.
-    </p>
-    <p>Trạng thái 'AM' có nghĩa là file đã được thay đổi. Nếu bây giờ ta xác
-    nhận, ta sẽ xác nhận phiên bản file này ở lần <code>git add</code> trước,
-    chứ không phải phiên bản trên đĩa cứng. Để lưu lại phiên bản trên đĩa cứng,
-    bạn phải dùng lệnh <code>git add</code>.
+    <p>Trạng thái 'AM' có nghĩa là file đã được thay đổi sau khi ta thêm tập
+    tin đó vào (chữ 'A' chỉ 'Add', hay thêm vào, còn chữ 'M' chỉ 'Modified', hay thay đổi).
+    Nếu bây giờ ta xác nhận, ta sẽ xác nhận tập tin này mà ta đã thêm ở
+    lần gõ lệnh <code>git add</code> trước. Đó là vì <code>git</code> không
+    mặc định giả sử rằng mọi tập tin có trong thư mục đang làm việc đề
+    sẽ được thêm vào bản sao. Khi nào cần, bạn phải chỉ định cụ thể việc
+    thêm tập tin nào vào.
     </p>
 
     <p class="nutshell">
-    <strong>In a nutshell</strong>,
-    you run <code>git add</code> on a file when you want to
-    include whatever changes you've made to it in your next commit snapshot.
-    Anything you've changed that is not added will not be included - this means
-    you can craft your snapshots with a bit more precision than most other SCM
-    systems.</p>
     <p class="nutshell">
     <strong>Tóm tắt:</strong>,
-    dùng <code>git add</code> để thêm file đã thay đổi vào phiên bản trước khi
-    tiến hành xác nhận, nhờ vậy mà các phiên bản có thể bao gồm chính xác những
-    file bạn muốn.</p>
+    Dùng <code>git add</code> để thêm file đã thay đổi vào phiên bản trước khi
+    tiến hành xác nhận. Chỉ những thay đổi nào được thêm vào mới được xác nhận
+    vào kho, nhờ vậy mà các phiên bản có thể bao gồm chính xác những file bạn muốn.</p>
 
-    <p>For a very interesting example of using this flexibility to stage only
-    parts of modified files at a time, see the '-p' option to
     <code>git add</code> in the Pro Git book.</p>
     <p>Một điều rất thú vị là tính mềm dẻo này có thể được áp dụng để ghi nhận
     chỉ một phần của file đã thay đổi, xem tùy chọn '-p' của <code>git add</code>
-    trong Pro Git.</p>
-
+    để biết thêm chi tiết.</p>
   </div>
 
 </div>
@@ -177,24 +138,15 @@ layout: reference
       <a target="new" href="http://progit.org/book/ch2-2.html#checking_the_status_of_your_files">book</a>
     </span>
     <a name="status">git status</a>
-    <span class="desc">view the status of your files in the working directory and staging area</span>
     <span class="desc">Xem trạng thái của thư mục hiện tại và vùng tạm</span>
   </h2>
 
   <div class="block">
-    <p>As you saw in the <code>git add</code> section, in order to see what the
-    status of your staging area is compared to the code in your working
-    directory, you can run the <code>git status</code> command. I demonstrated
-    using it with the <code>-s</code> option, which gives you short output.
-    Without that flag, the <code>git status</code> command will give you more
-    context and hints.  Here is the same status output with and without the
-    <code>-s</code>.  The short output looks like this:
-    </p>
     <p>Như đã thấy trong mục <code>git add</code>, để xem trạng thái vùng tạm ta
-    dùng lệnh <code>git status</code>. Tôi đã trình bày nó với tùy chọn <code>-s</code>,
+    dùng lệnh <code>git status</code>. Việc dùng lệnh đó với tùy chọn <code>-s</code>,
     cho ta một kết quả ngắn gọn. Nếu không có tùy chọn nào, lệnh <code>git status</code>
-    sẽ cho thấy nhiều ngữ cảnh và gợi ý hơn. Dưới đây là kết quả của cùng một trạng
-    thái khi có và không có <code>-s</code>. Đây là kết quả ngắn:
+    sẽ cho thấy thông tin chi tiết hơn. Dưới đây là kết quả của cùng một trạng
+    thái khi có và không có <code>-s</code>. Đầu tiên là kết quả ngắn gọn:
 
 <pre>
 <b>$ git status -s</b>
@@ -202,8 +154,7 @@ layout: reference
 <span class="green">A</span>  hello.rb
 </pre>
 
-    Where the same status with the long output looks like this:
-    Còn đây là cùng trạng thái trên nhưng với kết quả dạng đầy đủ:
+    Dươi đây không dùng tham số <code>-s</code>, cho ra kết quả dạng đầy đủ hơn
 
 <pre>
 <b>$ git status</b>
@@ -225,16 +176,10 @@ layout: reference
 #
 </pre>
 
-    <p>You can easily see how much more compact the short output is, but the
-    long output has useful tips and hints as to what commands you may want to
-    use next.
-    </p>
     <p>Rất dễ để nhận ra sự khác biệt giữa hai kết quả trên. Dạng đầy đủ có chứa
     gợi ý về lệnh mà ta sẽ dùng tiếp theo.
     </p>
 
-    <p>Git will also tell you about files that were deleted since your last
-    commit or files that were modified or staged since your last commit.</p>
     <p>Git cũng sẽ cho thấy những file đã bị xóa và file bị thay đổi hay đã
     được ghi nhận kể từ lần xác nhận trước.
 
@@ -244,13 +189,9 @@ layout: reference
  <span class="red">D</span> hello.rb
 </pre>
 
-    You can see there are two columns in the short status output.  The first
-    column is for the staging area, the second is for the working directory.
-    So for example, if you have the README file staged and then you modify
-    it again without running <code>git add</code> a second time, you'll see
-    this:
-    Dạng ngắn của trạng thái bao gồm hai côt. Côt đầu tiên dành cho vùng tạm,
-    còn côt thứ hai là dành cho thư mục hiện hành. Nếu bạn đã sửa file README,
+    Dạng ngắn của trạng thái bao gồm hai cột. Côt đầu tiên dành mô tả
+    trạng thái các tập tin trong chỉ mục tạm, còn côt thứ hai là dành liệt
+    kê các tập tin ở thư mục hiện hành. Nếu bạn đã sửa file README,
     ghi nhận nó vào vùng tạm rồi lại sửa nó mà không thực hiện <code>git add</code>
     lần nữa, kết quả sẽ như thế này:
 
@@ -261,13 +202,9 @@ layout: reference
 </pre>
 
     <p class="nutshell">
-    <strong>In a nutshell</strong>,
-    you run <code>git status</code> to see if anything has been modified
-    and/or staged since your last commit so you can decide if you want to
-    commit a new snapshot and what will be recorded in it.
     <strong>Tóm tắt:</strong>,
-    dùng lệnh <code>git status</code> khi cần xem những thay đổi để quyết định
-    xem có nên ghi lại chúng hay không.
+    Dùng lệnh <code>git status</code> khi cần xem những thay đổi để quyết định
+    xem có nên xác nhậu lưu lại chúng hay không.
     </p>
 
 
@@ -281,16 +218,10 @@ layout: reference
       <a target="new" href="http://progit.org/book/ch2-2.html#viewing_your_staged_and_unstaged_changes">book</a>
     </span>
     <a name="diff">git diff</a>
-    <span class="desc">shows diff of what is staged and what is modified but unstaged</span>
-    <span class="desc">hiển thị những sai khác</span>
+    <span class="desc">hiển thị những thay đổi đang hay đã thực hiện</span>
   </h2>
 
   <div class="block">
-    <p>There are two main uses of the <code>git diff</code> command.  One use we
-    will describe here, the other we will describe later in the
-    <a href="/inspect">"Inspection and Comparison"</a>
-    section. The way we're going to use it here is to describe the
-    changes that are staged or modified on disk but unstaged.</p>
     <p>Lệnh <code>git diff</code> có hai công dụng chính. Một trong số chúng ta sẽ
     nói đến ở đây, đó là thể hiện những thay đổi đã được ghi nhận hoặc chưa được ghi
     nhận. Còn công dụng còn lại sẽ được đề cập đến trong trong phần
@@ -298,17 +229,11 @@ layout: reference
 
     <h4>
       git diff
-      <small>show diff of unstaged changes</small>
       <small>chỉ ra những thay đổi chưa được ghi nhận</small>
     </h4>
 
-    <p>Without any extra arguments, a simple <code>git diff</code> will display
-    in unified diff format (a patch) what code or content you've changed in your
-    project since the last commit that are not yet staged for the next commit
-    snapshot.
-    </p>
     <p>Mặc định <code>git diff</code> sẽ hiển thị tổng hợp những sự thay đổi
-    (một bản vá) mà bạn đã tạo ra so với lần xác nhận trước mà chưa được ghi
+    (một bản vá) mà bạn vừa tạo ra so với lần xác nhận trước mà chưa được ghi
     nhận cho lần xác nhận kế tiếp.
     </p>
 
@@ -969,4 +894,3 @@ M hello.rb
 
 <p><a href="/branching">On to Branching and Merging &#187;</a></p>
 <p><a href="/branching">Đi đến rẽ nhánh và trộn &#187;</a></p>
-
