@@ -59,11 +59,9 @@ layout: reference
     quản lý các kho cùng với kết nối tới chúng, kể cả phân quyền (đọc với
     kho này, được ghi vào kho kia,...). </p>
 
-    <p>Các kho ở máy phục vụ khác nhau được phân biệt chỉ bằng địa chỉ
-    thực, mà bằng bởi tên ngắn gọn mà bạn gán cho địa chỉ đó. Như vậy,
-    việc sử dụng các kho sẽ dễ nhớ, đơn giản hơn rất nhiều.You use the
-    <code>git remote</code> command to manage this list of remote repos that
-    you care about.</p>
+    <p>Các kho ở máy phục vụ khác nhau không chỉ được phân biệt bằng địa chỉ URL đầy đủ, mà còn có thể bằng một tên ngắn gọn mà bạn gán cho địa chỉ đó. Như vậy,
+    việc sử dụng các kho sẽ dễ nhớ, đơn giản hơn rất nhiều. Bạn sử dụng lệnh
+    <code>git remote</code> để quản lý danh sách các kho.</p>
 
     <h4>
       git remote
@@ -198,7 +196,7 @@ github	git@github.com:schacon/hw.git (push)
 
     <p>Bây giờ, đi vào chi tiết. Giả sử các kho xa đã được thiết lập và
     bạn muốn kéo thông tin từ xa về máy: bạn sẽ dùng lệnh <code>git fetch [tên kho]</code>.
-    Sau đó, bạn có thể trộn bằng <code>git merge [tên khoa]/[tên nhánh]</code>.
+    Sau đó, bạn có thể trộn bằng <code>git merge [tên kho]/[tên nhánh]</code>.
     Chẳng hạn, khi đang thực hiện dự án Hello World, thấy có ai đó đã sửa
     đổi cho dự án này, và bạn muốn kéo các thay đổi của họ về máy, thì
     các lệnh sẽ dùng như sau:</p>
